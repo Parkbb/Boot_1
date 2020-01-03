@@ -2,9 +2,12 @@ package com.iu.b1.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,22 +23,28 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("memberJoin")
-	public String memberJoin() throws Exception{
+	public String memberJoin(Model model) throws Exception{
+		model.addAttribute("memberVO", new MemberVO());
 		return "member/memberJoin";
 	}
 	
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(MemberVO memberVO, MultipartFile files) throws Exception{
+	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, MultipartFile files) throws Exception{
 		int result = memberService.memberJoin(memberVO, files);
 		ModelAndView mv = new ModelAndView();
-		String msg = "가입 실패";
-		if(result >0 )
-			msg = "가입 성공";
 		
-		String path = "../";
-		mv.addObject("message", msg);
-		mv.addObject("path", path);
-		mv.setViewName("common/commonResult");
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("member/memberJoin");
+		}else {
+			String msg = "가입 실패";
+			if(result >0 )
+				msg = "가입 성공";
+		
+			String path = "../";
+			mv.addObject("message", msg);
+			mv.addObject("path", path);
+			mv.setViewName("common/commonResult");
+		}
 		return mv;
 		
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,39 +11,43 @@
 </head>
 <body>
 <c:import url="../template/nav.jsp" />
-<form action="./memberJoin" method="post" enctype="multipart/form-data">
 
-  <div class="form-group col-sm-3">
-    <label for="id">ID:</label>
-    <input type="text" class="form-control" placeholder="Enter id" id="id" name="id">
-  </div>
-  
-  <div class="form-group col-sm-3">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd" name="pw">
-  </div>
-  
-  <div class="form-group col-sm-3">
-    <label for="pwd2">Password check:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd2" name="pw2">
-  </div>
-  
-  <div class="form-group col-sm-3">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" placeholder="Enter Email" id="email" name="email">
-  </div>
-  
-  <div class="form-group col-sm-3">
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" placeholder="Enter name" id="name" name="name">
-  </div>
-  
-  <div class="form-group col-sm-3">
-    <label for="files">Name:</label>
-    <input type="file" class="form-control" id="files" name="files">
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<form:form action="./memberJoin" method="post" enctype="multipart/form-data" modelAttribute="memberVO">
+	<div class="form-group col-sm-3">
+    	<label for="id">ID:</label>
+    	<form:input path="id" id="id" class="form-control" placeholder="Enter ID"/>
+    	<form:errors path="id" cssStyle="color:red;"></form:errors>
+  	</div>
+	
+	<div class="form-group col-sm-3">
+    	<label for="pw">PW:</label>
+    	<form:password path="pw" id="pw" class="form-control" placeholder="Enter PW"/>
+  	</div>
+  	
+  	<div class="form-group col-sm-3">
+    	<label for="pw">PW:</label>
+    	<form:password path="pw2" id="pw2" class="form-control" placeholder="Enter PW"/>
+  	</div>
+	
+	<div class="form-group col-sm-3">
+    	<label for="name">NAME:</label>
+    	<form:input path="name" id="name" class="form-control" placeholder="Enter NAME"/>
+  	</div>
+  	
+  	<div class="form-group col-sm-3">
+    	<label for="email">EMAIL:</label>
+    	<form:input path="email" id="email" class="form-control" placeholder="Enter EMAIL"/>
+  	</div>
+	
+	<div class="form-group col-sm-3">
+    	<label for="files">Name:</label>
+    	<input type="file" class="form-control" id="files" name="files">
+	</div>
+	
+	<form:button class="btn btn-primary">SUBMIT</form:button>
+	<button type="submit" class="btn btn-primary">Submit</button>
+	
+</form:form>
+
 </body>
 </html>
