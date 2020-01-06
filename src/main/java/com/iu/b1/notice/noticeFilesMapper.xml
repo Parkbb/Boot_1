@@ -10,7 +10,7 @@
   	<insert id="noticeFilesInsert2" parameterType="java.util.List">
   		insert into noticeFiles
   		values <foreach collection="list" item="item" index="index" separator=",">
-  		(null, #{item.num}, #{item.oname}, #{item.fname})
+  		(null, #{item.num}, #{item.fname}, #{item.oname})
   		</foreach>
   	
   	</insert>

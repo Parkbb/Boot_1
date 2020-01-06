@@ -13,7 +13,7 @@
 <body>
 <c:import url="../template/nav.jsp" />
 <div class="container">
-	<form:form modelAttribute="noticeVO" id="frm" enctype="multipart/form-data" action="./noticeWrite">
+	<form:form action="noticeWrite" method="post" modelAttribute="noticeVO" id="frm" enctype="multipart/form-data" >
 			<div class="form-group">
 		      <label for="writer">Writer:</label>
 		      <form:input  class="form-control" path="writer"/>

@@ -3,7 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.iu.b1.notice.NoticeMapper">
+  	<sql id="bs">
+  		<choose>
+  			<when test="kind =='kt'">
+  				where title like CONCAT('%',#{search},'%')
+  			</when>
+  			<when test="kind == 'kc'">
+				where contents like CONCAT('%',#{search},'%')
+			</when>
+			<otherwise>
+				where writer like CONCAT('%',#{search},'%')
+			</otherwise>
+  		</choose>
+  	</sql>
   	<insert id="noticeInsert" parameterType="com.iu.b1.notice.NoticeVO" useGeneratedKeys="true" keyProperty="num">
   		insert into notice (num, title, writer, contents, regDate, hit) values (#{num}, #{title}, #{writer}, #{contents}, curdate(), 0)
   	</insert>
+  	<select id="boardList" parameterType="com.iu.b1.util.Pager" resultType="com.iu.b1.notice.NoticeVO">
+  		select * from notice 
+  		<include refid="bs"></include> and num> 0
+  		order by num desc limit #{startRow}, #{perPage}
+  	</select>
+  	<select id="totalCount" resultType="java.lang.Integer">
+  		select count(num) from notice
+  		<include refid="bs"></include>
+  	</select>
+  	
+  	<resultMap type="com.iu.b1.notice.NoticeVO" id="boardFile">
+  		<id property="num" column="num"/>
+  		<result property="title" column="title" />
+  		<result property="writer" column="writer" />
+  		<result property="contents" column="writer" />
+  		<result property="regDate" column="regDate" />
+  		<result property="hit" column="hit" />
+  		<collection property="noticefiles" javaType="java.util.List" ofType="com.iu.b1.notice.NoticeFilesVO" resultMap="filesResult"></collection>
+  	</resultMap>
+  	
+  	
+  	<resultMap type="com.iu.b1.notice.NoticeFilesVO" id="filesResult">
+  		<id property="fnum" column="fnum"/>
+  		<result property="fname" column="fname"/>
+  		<result property="oname" column="oname"/>
+  	</resultMap>
+  	
+  	<select id="boardSelect" parameterType="com.iu.b1.notice.NoticeVO" resultMap="boardFile">
+  		select * from notice left outer join noticeFiles
+  		using(num)
+  		where num = #{num}
+  	</select>
   </mapper>

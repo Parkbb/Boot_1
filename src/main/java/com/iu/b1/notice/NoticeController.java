@@ -1,5 +1,7 @@
 package com.iu.b1.notice;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.b1.util.Pager;
 
 @Controller
 @RequestMapping("/notice/**")
@@ -40,10 +44,15 @@ public class NoticeController {
 	@PostMapping("noticeWrite")
 	public ModelAndView noticeWrite(@Valid NoticeVO noticeVO,BindingResult bindingResult, MultipartFile[] files) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println(noticeVO.getTitle());
+		System.out.println(noticeVO.getWriter());
 		if(bindingResult.hasErrors()) {
-			mv.addObject("boadrVO", noticeVO);
+			System.out.println(bindingResult.getErrorCount());
+			System.out.println("어");
+			mv.addObject("noticeVO", noticeVO);
 			mv.setViewName("notice/noticeWrite");
 		}else {
+			System.out.println("디");
 			int result = noticeService.noticeWrite(noticeVO, files);
 			String message="작성 실패";
 			if(result >0) {
@@ -54,6 +63,24 @@ public class NoticeController {
 			mv.setViewName("common/commonResult");
 		}
 		
+		return mv;
+	}
+	@GetMapping("noticeList")
+	public ModelAndView boardList(ModelAndView mv, Pager pager) throws Exception{
+		
+		List<NoticeVO> list = noticeService.boardList(pager);
+		mv.addObject("Pager", pager);
+		mv.addObject("list", list);
+		mv.setViewName("notice/noticeList");
+		
+		return mv;
+	}
+	@GetMapping("noticeSelect")
+	public ModelAndView boardSelect(ModelAndView mv, NoticeVO noticeVO) throws Exception{
+		noticeVO = noticeService.boardSelect(noticeVO);
+		
+		mv.addObject("noticeVO", noticeVO);
+		mv.setViewName("notice/noticeSelect");
 		return mv;
 	}
 }

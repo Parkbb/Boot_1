@@ -10,12 +10,6 @@
 				$("#frm").submit();
 			}
 			});
-			
-			
-		$("#contents").summernote({
-			toolbar:[]
-		});
-		
 		
 		$("#contents").summernote({
 			

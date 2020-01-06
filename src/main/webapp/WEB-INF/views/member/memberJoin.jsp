@@ -12,42 +12,50 @@
 <body>
 <c:import url="../template/nav.jsp" />
 
-<form:form action="./memberJoin" method="post" enctype="multipart/form-data" modelAttribute="memberVO">
-	<div class="form-group col-sm-3">
-    	<label for="id">ID:</label>
-    	<form:input path="id" id="id" class="form-control" placeholder="Enter ID"/>
-    	<form:errors path="id" cssStyle="color:red;"></form:errors>
-  	</div>
+<div class="container">
+  <h2>Member Join</h2>
+
+	<form:form action="./memberJoin" modelAttribute="memberVO" method="post" enctype="multipart/form-data">
+	 <div class="form-group">
+      <label for="Id">Id:</label>
+      <form:input path="id" placeholder="Enter Id"  class="form-control" id="id"/>
+      <form:errors path="id" />
+   	 </div>
+   	 
+   	<div class="form-group">
+      <label for="pw">Password:</label>
+      <form:password path="pw" class="form-control" id="pw" placeholder="Enter password"/>
+      <form:errors path="pw" cssStyle="color:red;" />
+    </div>
+    
+    <div class="form-group">
+      <label for="pw">Password:</label>
+      <form:password path="pw2" class="form-control" id="pw" placeholder="Enter password"/>
+      <form:errors path="pw2" />
+    </div>
 	
-	<div class="form-group col-sm-3">
-    	<label for="pw">PW:</label>
-    	<form:password path="pw" id="pw" class="form-control" placeholder="Enter PW"/>
-  	</div>
-  	
-  	<div class="form-group col-sm-3">
-    	<label for="pw">PW:</label>
-    	<form:password path="pw2" id="pw2" class="form-control" placeholder="Enter PW"/>
-  	</div>
+	<div class="form-group">
+      <label for="Name">Name:</label>
+      <form:input path="name" class="form-control" id="name" placeholder="Enter Name"/>
+    </div>
+    
+    <div class="form-group">
+      <label for="Email">Email:</label>
+      <form:input path="email" class="form-control" id="email" placeholder="Enter Email"/>
+    </div>
 	
-	<div class="form-group col-sm-3">
-    	<label for="name">NAME:</label>
-    	<form:input path="name" id="name" class="form-control" placeholder="Enter NAME"/>
-  	</div>
-  	
-  	<div class="form-group col-sm-3">
-    	<label for="email">EMAIL:</label>
-    	<form:input path="email" id="email" class="form-control" placeholder="Enter EMAIL"/>
-  	</div>
+	<div class="form-group">
+      <label for="File">File:</label>
+      <input type="file" class="form-control" id="files" name="files">
+    </div>
 	
-	<div class="form-group col-sm-3">
-    	<label for="files">Name:</label>
-    	<input type="file" class="form-control" id="files" name="files">
-	</div>
+	 <button type="submit" class="btn btn-default">Submit</button>
 	
-	<form:button class="btn btn-primary">SUBMIT</form:button>
-	<button type="submit" class="btn btn-primary">Submit</button>
-	
-</form:form>
+	</form:form>
+		
+
+
+</div>
 
 </body>
 </html>

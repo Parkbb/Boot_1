@@ -10,22 +10,23 @@
 </head>
 <body>
 <c:import url="../template/nav.jsp" />
-<form action="./memberLogin" method="post">
-  <div class="form-group  col-sm-3">
-    <label for="id">Email address:</label>
-    <input type="id" class="form-control" placeholder="Enter id" id="id" name="id">
-  </div>
-  <div class="form-group  col-sm-3">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd" name="pw">
-  </div>
-  <div class="form-group form-check  col-sm-3">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container">
+	<form action="./memberLogin" method="post">
+	  <div class="form-group">
+	    <label for="Id">Id:</label>
+	    <input type="text" class="form-control" id="id" name="id">
+	  </div>
+	  <div class="form-group">
+	    <label for="pw">Password:</label>
+	    <input type="password" class="form-control" id="pw" name="pw">
+	  </div>
+	  <div class="checkbox">
+	    <label><input type="checkbox"> Remember me</label>
+	  </div>
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+
+</div>
 
 </body>
 </html>

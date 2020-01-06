@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.b1.util.FilePathGe;
 import com.iu.b1.util.FileSaver;
+import com.iu.b1.util.Pager;
 
 @Transactional
 @Service
@@ -30,7 +31,8 @@ public class NoticeService {
 	private FilePathGe filePathGe;
 	@Autowired
 	private FileSaver fileSaver;
-	
+	@Autowired
+	private Pager pager;
 	
 	
 	public int noticeWrite(NoticeVO noticeVO, MultipartFile[] files) throws Exception{
@@ -55,5 +57,16 @@ public class NoticeService {
 		noticeFilesMapper.noticeFilesInsert2(list);
 		
 		return result;
+	}
+	
+	public List<NoticeVO> boardList(Pager pager) throws Exception{
+		pager.makeRow();
+		pager.makePage(noticeMapper.totalCount(pager));
+		
+		return noticeMapper.boardList(pager);
+	}
+	
+	public NoticeVO boardSelect(NoticeVO noticeVO) throws Exception{
+		return noticeMapper.boardSelect(noticeVO);
 	}
 }
