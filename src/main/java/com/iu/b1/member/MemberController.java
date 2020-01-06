@@ -30,12 +30,13 @@ public class MemberController {
 	
 	@PostMapping("memberJoin")
 	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, MultipartFile files) throws Exception{
-		int result = memberService.memberJoin(memberVO, files);
 		ModelAndView mv = new ModelAndView();
 		
 		if(bindingResult.hasErrors()) {
 			mv.setViewName("member/memberJoin");
+			mv.addObject("memberVO", memberVO);
 		}else {
+			int result = memberService.memberJoin(memberVO, files);
 			String msg = "가입 실패";
 			if(result >0 )
 				msg = "가입 성공";

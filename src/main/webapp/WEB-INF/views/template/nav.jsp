@@ -9,6 +9,10 @@
       <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
     </li>
     
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/notice/noticeList">Notice</a>
+    </li>
+    
    <c:if test="${empty sessionScope.memberVO}">
     <li class="nav-item">
       <a class="nav-link" href="${pageContext.request.contextPath}/member/memberJoin">Join</a>

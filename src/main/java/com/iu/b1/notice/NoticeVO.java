@@ -1,12 +1,18 @@
 package com.iu.b1.notice;
 
+import java.sql.Date;
+
+import javax.validation.constraints.NotEmpty;
+
 public class NoticeVO {
 	
 	private int num;
+	@NotEmpty
 	private String title;
+	@NotEmpty
 	private String writer;
 	private String contents;
-	private String regDate;
+	private Date regDate;
 	private int hit;
 	
 	
@@ -34,10 +40,10 @@ public class NoticeVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public String getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(String regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 	public int getHit() {

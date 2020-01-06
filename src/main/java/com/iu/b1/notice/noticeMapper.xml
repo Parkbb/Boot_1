@@ -2,11 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.iu.b1.notice.noticeMapper">
-  	<insert id="noticeInsert" parameterType="com.iu.b1.notice.NoticeVO">
-  	
-  		<selectKey order="BEFORE" resultType="com.iu.b1.notice.NoticeVO">
-  		</selectKey>
-  		insert into notice values (0, #{title}, #{writer},#{contents},#{regDate},0)
+  <mapper namespace="com.iu.b1.notice.NoticeMapper">
+  	<insert id="noticeInsert" parameterType="com.iu.b1.notice.NoticeVO" useGeneratedKeys="true" keyProperty="num">
+  		insert into notice (num, title, writer, contents, regDate, hit) values (#{num}, #{title}, #{writer}, #{contents}, curdate(), 0)
   	</insert>
   </mapper>

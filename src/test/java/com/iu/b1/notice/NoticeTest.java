@@ -10,17 +10,23 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 class NoticeTest {
 	
 	@Autowired
-	private noticeMapper noticeMapper;
+	private NoticeMapper noticeMapper;
 	
 	@Test
 	public void noticeTest() throws Exception{
-		NoticeVO noticeVO = new NoticeVO();
-		noticeVO.setWriter("s");
-		noticeVO.set
+		
+		
+		for (int i = 0; i < 30; i++) {
+			NoticeVO noticeVO = new NoticeVO();
+			noticeVO.setTitle("title"+i);
+			noticeVO.setWriter("writer"+i);
+			noticeVO.setContents("contents"+i);
+			noticeMapper.noticeInsert(noticeVO);
+		}
 		
 		
 	}

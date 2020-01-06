@@ -12,6 +12,7 @@
 <body>
 <c:import url="template/nav.jsp" />
 <div class="container">
+<spring:message code="hello"></spring:message>
 	<form action="./">
 		<select name="locale">
 			<option>KO</option>

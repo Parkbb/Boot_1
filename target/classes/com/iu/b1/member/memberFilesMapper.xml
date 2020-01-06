@@ -8,6 +8,8 @@
   		<!-- insert into memberFiles (id, fname, oname) values (#{id}, #{fname}, #{oname}); -->
   	</insert>
 	
+	
+	
 	<select id="memberFilesSelect" parameterType="com.iu.b1.member.MemberFilesVO" resultType="com.iu.b1.member.MemberFilesVO">
 		select * from memberFiles where fnum = #{fnum}
 	</select>
